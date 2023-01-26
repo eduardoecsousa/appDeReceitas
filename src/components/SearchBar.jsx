@@ -9,6 +9,7 @@ function SearchBar() {
         type="button"
         onClick={ () => { setSearch(!search); } }
       >
+        a
         <img
           src={ SearchIcon }
           alt="icon-seach"
