@@ -15,6 +15,7 @@ function SearchBar({ titlePage, dispatch }) {
   const { makeFetch, isLoading } = useFetch();
 
   useEffect(() => {
+    console.log(returnAPI);
     const obj = titlePage === 'Drinks' ? 'drinks' : 'meals';
     if (!returnAPI) {
       return;
@@ -30,6 +31,7 @@ function SearchBar({ titlePage, dispatch }) {
   }, [returnAPI]);
 
   const handleSearch = async () => {
+    console.log('clickou');
     if (option === 'firstLetter' && valueInput.length > 1) {
       global.alert('Your search must have only 1 (one) character');
       return;

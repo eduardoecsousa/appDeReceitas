@@ -28,6 +28,10 @@ function Meals({ dispatch, revenues, titlepage }) {
 
 Meals.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  revenues: PropTypes.shape({
+    map: PropTypes.func,
+  }).isRequired,
+  titlepage: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
