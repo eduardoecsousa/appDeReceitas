@@ -1,40 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import SearchIcon from '../images/searchIcon.svg';
 import useFetch from '../hooks/useFetch';
+import { getRevenues } from '../redux/actions';
 
-function SearchBar() {
+function SearchBar({ titlePage, dispatch }) {
   const [search, setSearch] = useState(false);
   const [valueInput, setValueInput] = useState('');
   const [option, setOption] = useState('');
+  const [returnAPI, setReturnAPI] = useState();
+  const [redirect, setRedirect] = useState(false);
   const { makeFetch, isLoading } = useFetch();
+
+  useEffect(() => {
+    const obj = titlePage === 'Drinks' ? 'drinks' : 'meals';
+    if (!returnAPI) {
+      return;
+    }
+    if (!returnAPI[obj]) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      return;
+    }
+    dispatch(getRevenues(returnAPI[obj]));
+    if (returnAPI[obj].length === 1) {
+      setRedirect(true);
+    }
+  }, [returnAPI]);
 
   const handleSearch = async () => {
     if (option === 'firstLetter' && valueInput.length > 1) {
       global.alert('Your search must have only 1 (one) character');
       return;
     }
-    const urlIngredient = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${valueInput}`;
-    const urlName = `https://www.themealdb.com/api/json/v1/1/search.php?s=${valueInput}`;
-    const urlFirstLetter = `https://www.themealdb.com/api/json/v1/1/search.php?f=${valueInput}`;
+    const API = titlePage === 'Drinks' ? 'thecocktaildb' : 'themealdb';
+    const urlIngredient = `https://www.${API}.com/api/json/v1/1/filter.php?i=${valueInput}`;
+    const urlName = `https://www.${API}.com/api/json/v1/1/search.php?s=${valueInput}`;
+    const urlFirstLetter = `https://www.${API}.com/api/json/v1/1/search.php?f=${valueInput}`;
     switch (option) {
     case 'ingredient':
-      console.log(await makeFetch(urlIngredient));
+      setReturnAPI(await makeFetch(urlIngredient));
       break;
     case 'name':
-      console.log(await makeFetch(urlName));
+      setReturnAPI(await makeFetch(urlName));
       break;
     case 'firstLetter':
-      console.log(await makeFetch(urlFirstLetter));
+      setReturnAPI(await makeFetch(urlFirstLetter));
       break;
     default:
       return [];
     }
   };
 
+  const toRedirect = () => {
+    const API = titlePage === 'Drinks' ? 'drinks' : 'meals';
+    const ID = titlePage === 'Drinks' ? 'idDrink' : 'idMeal';
+    return (<Redirect to={ `/${API}/${returnAPI[API][0][ID]}` } />);
+  };
+
   return (
     <div>
+      {redirect && toRedirect()}
       <button
         type="button"
         onClick={ () => { setSearch(!search); } }
@@ -98,9 +125,10 @@ function SearchBar() {
   );
 }
 
-// SearchBar.propTypes = {
-//   titlePage: PropTypes.string.isRequired,
-// };
+SearchBar.propTypes = {
+  titlePage: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   titlePage: state.title.title,
