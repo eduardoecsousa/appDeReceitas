@@ -1,7 +1,7 @@
 import { CHANGE_TITLE } from '../actions';
 
 const initialState = {
-  title: 'Login',
+  title: '',
 };
 
 const title = (state = initialState, { type, payload }) => {
