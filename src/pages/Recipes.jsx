@@ -1,16 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import CardRevenues from '../components/CardRevenues';
 import { changeTile, getRevenues } from '../redux/actions';
 import Footer from '../components/Footer';
 import useFetch from '../hooks/useFetch';
+import Filter from '../components/Filter';
 
 const NUMBER = 11;
 
 function Recipes({ dispatch, revenues, titlePage, history: { location: { pathname } } }) {
   const { makeFetch, isLoading } = useFetch();
+  const [clear, setClear] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,20 +20,19 @@ function Recipes({ dispatch, revenues, titlePage, history: { location: { pathnam
         dispatch(changeTile('Drinks'));
         const response = await makeFetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
         dispatch(getRevenues(response.drinks));
-        console.log(response);
       } else {
         dispatch(changeTile('Meals'));
         const response = await makeFetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
         dispatch(getRevenues(response.meals));
-        console.log(response);
       }
     };
     fetchData();
-  }, [pathname]);
+  }, [pathname, clear]);
 
   const id = titlePage === 'Drinks' ? 'idDrink' : 'idMeal';
   return (
     <div>
+      <Filter setClear={ setClear } />
       {isLoading && <p>Loading...</p>}
       {revenues.map((recipe, index) => index <= NUMBER && (
         <CardRevenues

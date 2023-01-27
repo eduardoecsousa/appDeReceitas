@@ -16,7 +16,6 @@ function SearchBar({ titlePage, dispatch }) {
   const { makeFetch, isLoading } = useFetch();
 
   useEffect(() => {
-    console.log(returnAPI);
     const obj = titlePage === 'Drinks' ? 'drinks' : 'meals';
     if (!returnAPI) {
       return;
