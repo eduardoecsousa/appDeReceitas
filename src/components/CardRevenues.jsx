@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-function CardRevenues({ recipe, index, titlepage }) {
-  const image = titlepage === 'Drinks' ? 'strDrinkThumb' : 'strMealThumb';
-  const name = titlepage === 'Drinks' ? 'strDrink' : 'strMeal';
+function CardRevenues({ recipe, index, titlePage }) {
+  const image = titlePage === 'Drinks' ? 'strDrinkThumb' : 'strMealThumb';
+  const name = titlePage === 'Drinks' ? 'strDrink' : 'strMeal';
   return (
     <div data-testid={ `${index}-recipe-card` }>
       <img
@@ -18,8 +18,8 @@ function CardRevenues({ recipe, index, titlepage }) {
 
 CardRevenues.propTypes = {
   index: PropTypes.number.isRequired,
-  recipe: PropTypes.shape([]).isRequired,
-  titlepage: PropTypes.string.isRequired,
+  recipe: PropTypes.shape({}).isRequired,
+  titlePage: PropTypes.string.isRequired,
 };
 
 export default CardRevenues;
