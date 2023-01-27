@@ -12,7 +12,7 @@ afterEach(() => {
 
 const SEARCH_TOP = 'search-top-btn';
 const SEARCH_INPUT = 'search-input';
-const EXEC_SEARCH = 'exer-search-btn';
+const EXEC_SEARCH = 'exec-search-btn';
 
 describe('Header', () => {
   test('Testa se renderiza apenas ao clickar no botão', () => {
@@ -53,7 +53,7 @@ describe('Header', () => {
 
     userEvent.type(searchInput, 'aaaaaaaa');
 
-    const execSearchBtn = screen.getByTestId('exec-search-btn');
+    const execSearchBtn = screen.getByTestId(EXEC_SEARCH);
 
     userEvent.click(execSearchBtn);
 
@@ -103,7 +103,7 @@ describe('Header', () => {
 
     const { history } = renderWithRouterAndRedux(<App />);
 
-    act(() => {
+    await act(() => {
       history.push('/meals');
     });
 
@@ -121,7 +121,7 @@ describe('Header', () => {
 
     await waitFor(() => expect(window.alert).toBeCalledWith('Sorry, we haven\'t found any recipes for these filters.'));
   });
-  test('Se ao receber uma receita rendirza a pagina de detalhes', async () => {
+  test('Se ao receber uma receita renderiza a pagina de detalhes', async () => {
     global.fetch = jest.fn().mockResolvedValue({
       status: 200, ok: true, json: jest.fn().mockResolvedValue(oneMeal),
     });

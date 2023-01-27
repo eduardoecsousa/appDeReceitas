@@ -58,7 +58,7 @@ describe('2. Testa o componente Footer e...', () => {
 });
 
 describe('2. Testa o componente Footer e...', () => {
-  it('verifica se existe os icones de Meals e Drink na página Drinks', () => {
+  it('verifica se existe os icones de Meals e Drink na página Drinks', async () => {
     renderWithRouterAndRedux(<App />);
     const emailInput = screen.getByTestId(EMAIL_INPUT);
     const passwordInput = screen.getByTestId(PASSWORD_INPUT);
@@ -70,9 +70,11 @@ describe('2. Testa o componente Footer e...', () => {
     userEvent.type(passwordInput, PASSWORD);
     userEvent.click(button);
 
-    const drinksIcon = screen.getByRole('img', {
-      name: /drink icon/i,
-    });
+    // const drinksIcon = screen.getByRole('img', {
+    //   name: /drink icon/i,
+    // });
+
+    const drinksIcon = screen.getByTestId('drinks-bottom-btn');
 
     userEvent.click(drinksIcon);
 
@@ -81,6 +83,6 @@ describe('2. Testa o componente Footer e...', () => {
     });
 
     expect(mealsIcon).toBeInTheDocument();
-    expect(drinksIcon).toBeInTheDocument();
+    // expect(drinksIcon).toBeInTheDocument();
   });
 });

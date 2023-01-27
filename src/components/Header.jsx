@@ -8,7 +8,6 @@ import SearchBar from './SearchBar';
 function Header({ titlePage }) {
   const titleNoSearch = ['Favorite Recipes', 'Profile', 'Done Recipes'];
   const verification = titleNoSearch.some((title) => title === titlePage);
-  console.log(verification);
   return (
     <div>
       <h1 data-testid="page-title">{titlePage}</h1>
