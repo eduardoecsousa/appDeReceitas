@@ -8,14 +8,13 @@ import ButtonGeneric from '../components/ButtonGeneric';
 function Profile({ dispatch, history }) {
   const [email, setEmail] = useState('');
   useEffect(() => {
-    console.log('a');
     dispatch(changeTile('Profile'));
     setEmail(JSON.parse(localStorage.getItem('user')));
   }, []);
 
   return (
     <div>
-      <p data-testid="profile-email">{email.email}</p>
+      {email && <p data-testid="profile-email">{email.email}</p>}
       <ButtonGeneric
         id="profile-done-btn"
         name="Done Recipes"
@@ -41,6 +40,7 @@ function Profile({ dispatch, history }) {
 
 Profile.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({}).isRequired,
 };
 
 export default connect()(Profile);

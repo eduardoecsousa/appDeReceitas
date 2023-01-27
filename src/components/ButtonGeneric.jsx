@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-function ButtonGeneric({id, name, history, pathname}) {
+function ButtonGeneric({ id, name, history, pathname }) {
   const handleRedirect = () => {
     if (pathname === '/') {
       localStorage.clear();
@@ -15,5 +16,14 @@ function ButtonGeneric({id, name, history, pathname}) {
     </div>
   );
 }
+
+ButtonGeneric.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  pathname: PropTypes.string.isRequired,
+};
 
 export default ButtonGeneric;
