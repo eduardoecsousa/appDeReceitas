@@ -15,7 +15,6 @@ function SearchBar({ titlePage, dispatch }) {
   const { makeFetch, isLoading } = useFetch();
 
   useEffect(() => {
-    console.log(returnAPI);
     const obj = titlePage === 'Drinks' ? 'drinks' : 'meals';
     if (!returnAPI) {
       return;
@@ -70,7 +69,7 @@ function SearchBar({ titlePage, dispatch }) {
       >
         <img
           src={ SearchIcon }
-          alt="icon-seach"
+          alt="icon-search"
           data-testid="search-top-btn"
         />
       </button>
