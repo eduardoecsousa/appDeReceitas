@@ -1,18 +1,24 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { changeTile } from '../redux/actions';
 import Footer from '../components/Footer';
+import ButtonGeneric from '../components/ButtonGeneric';
 
 function Profile({ dispatch }) {
+  const [email, setEmail] = useState('');
   useEffect(() => {
     console.log('a');
     dispatch(changeTile('Profile'));
+    setEmail(JSON.parse(localStorage.getItem('user')));
   }, []);
 
   return (
     <div>
-      Profile
+      <p data-testid="profile-email">{email}</p>
+      <ButtonGeneric id="profile-done-btn" name="Done Recipes" />
+      <ButtonGeneric id="profile-favorite-btn" name="Favorite Recipes" />
+      <ButtonGeneric id="profile-logout-btn" name="Logout" />
       <Footer />
     </div>
   );
