@@ -8,8 +8,10 @@ import Drinks from './pages/Drinks';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import Header from './components/Header';
+
 import RecipeDetails from './components/RecipeDetails';
 // import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   return (

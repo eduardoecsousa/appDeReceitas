@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import CardRevenues from '../components/CardRevenues';
 import { changeTile } from '../redux/actions';
+import Footer from '../components/Footer';
 
 const NUMBER = 11;
 
@@ -22,6 +23,7 @@ function Meals({ dispatch, revenues, titlepage }) {
           key={ recipe[id] }
         />
       ))}
+      <Footer />
     </div>
   );
 }
