@@ -19,10 +19,16 @@ function Recipes({ dispatch, revenues, titlePage, history: { location: { pathnam
       if (pathname === '/drinks') {
         dispatch(changeTile('Drinks'));
         const response = await makeFetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+        if (!response.drinks) {
+          return;
+        }
         dispatch(getRevenues(response.drinks));
       } else {
         dispatch(changeTile('Meals'));
         const response = await makeFetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+        if (!response.meals) {
+          return;
+        }
         dispatch(getRevenues(response.meals));
       }
     };
