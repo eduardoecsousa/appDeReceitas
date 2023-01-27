@@ -21,18 +21,8 @@ function App() {
         <Route exact path="/drinks" component={ Recipes } />
         <Route exact path="/done-recipes" component={ DoneRecipes } />
         <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
-        <Route
-          exact
-          path="/meals/:id"
-          // render={ (props) => <SearchBar { ...props } /> }
-          component={ RecipeDetails }
-        />
-        <Route
-          exact
-          path="/drinks/:id"
-          // render={ (props) => <RecipeDetails { ...props } /> }
-          component={ RecipeDetails }
-        />
+        <Route exact path="/meals/:id" component={ RecipeDetails } />
+        <Route exact path="/drinks/:id" component={ RecipeDetails } />
         <Route exact path="/meals/:id-da-receita/in-progress" component={ Profile } />
         <Route exact path="/drinks/:id-da-receita/in-progress" component={ Profile } />
       </Switch>
