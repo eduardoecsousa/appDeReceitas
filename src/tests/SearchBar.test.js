@@ -12,7 +12,7 @@ afterEach(() => {
 
 const SEARCH_TOP = 'search-top-btn';
 const SEARCH_INPUT = 'search-input';
-const EXEC_SEARCH = 'exer-search-btn';
+const EXEC_SEARCH = 'exec-search-btn';
 
 describe('Header', () => {
   test('Testa se renderiza apenas ao clickar no botão', () => {
@@ -53,7 +53,7 @@ describe('Header', () => {
 
     userEvent.type(searchInput, 'aaaaaaaa');
 
-    const execSearchBtn = screen.getByTestId('exec-search-btn');
+    const execSearchBtn = screen.getByTestId(EXEC_SEARCH);
 
     userEvent.click(execSearchBtn);
 
