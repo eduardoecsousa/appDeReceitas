@@ -5,7 +5,7 @@ import useFetch from '../hooks/useFetch';
 import CardDetailsMeals from '../components/CardDetailsMeals';
 import CardDatailsDrinks from '../components/CardDatailsDrinks';
 
-function RecipeDetails({ match: { params: { id } }, location: { pathname } }) {
+function RecipeDetails({ match: { params: { id } }, location: { pathname }, history }) {
   const { makeFetch } = useFetch();
   const [details, setDetails] = useState([]);
   useEffect(() => {
@@ -17,25 +17,25 @@ function RecipeDetails({ match: { params: { id } }, location: { pathname } }) {
       setDetails(result[KEY][0]);
     };
     getDetails();
-    console.log(details);
   }, []);
   return (
     <div>
       {pathname === `/meals/${id}` ? (
-        <CardDetailsMeals details={ details } />)
-        : <CardDatailsDrinks details={ details } />}
+        <CardDetailsMeals details={ details } history={ history } />)
+        : <CardDatailsDrinks details={ details } history={ history } />}
     </div>
   );
 }
 
 RecipeDetails.propTypes = {
+  history: PropTypes.shape({}).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string,
     }),
-  }).isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string,
   }).isRequired,
 };
 

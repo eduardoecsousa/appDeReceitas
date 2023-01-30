@@ -11,6 +11,7 @@ import Filter from '../components/Filter';
 const NUMBER = 11;
 
 function Recipes({ dispatch, revenues, titlePage, history: { location: { pathname } } }) {
+  console.log(revenues);
   const { makeFetch, isLoading } = useFetch();
   const [clear, setClear] = useState();
 
@@ -55,9 +56,9 @@ function Recipes({ dispatch, revenues, titlePage, history: { location: { pathnam
 
 Recipes.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  revenues: PropTypes.shape({
-    map: PropTypes.shape({}),
-  }).isRequired,
+  revenues: PropTypes.arrayOf(
+    PropTypes.shape({}),
+  ).isRequired,
   titlePage: PropTypes.string.isRequired,
   history: PropTypes.shape({
     location: PropTypes.shape({

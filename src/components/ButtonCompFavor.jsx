@@ -1,0 +1,146 @@
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import copy from 'clipboard-copy';
+import heartWhite from '../images/whiteHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
+import heartBlack from '../images/blackHeartIcon.svg';
+
+const TIME = 3000;
+
+function ButtonCompFavor({ shareUrl, recipeFavorite }) {
+  const [favorites, setFavorites] = useState([]);
+  const [isCopy, setIsCopy] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.favoriteRecipes) {
+      setFavorites(JSON.parse(localStorage.getItem('favoriteRecipes')));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (recipeFavorite) {
+      const keyObjId = shareUrl.split('/')[3] === 'drinks'
+        ? 'idDrink'
+        : 'idMeal';
+      const favVerify = favorites.some((recipe) => {
+        console.log(recipe);
+        console.log(recipe.id);
+        console.log(keyObjId);
+        console.log(recipeFavorite);
+        console.log(recipeFavorite[keyObjId]);
+        return recipe.id === recipeFavorite[keyObjId];
+      });
+      setIsFavorite(favVerify);
+      console.log(favorites);
+    }
+  }, [favorites, recipeFavorite]);
+
+  const clickShare = () => {
+    copy(shareUrl);
+    setIsCopy(true);
+    const idTimeOut = setTimeout(() => {
+      setIsCopy(false);
+      clearTimeout(idTimeOut);
+    }, TIME);
+  };
+
+  // useEffect(() => {
+  // localStorage(favorites)
+  // }, [favorites]);
+
+  const saveDrinks = () => {
+    const { idDrink, strDrink, strAlcoholic,
+      strCategory, strDrinkThumb } = recipeFavorite;
+    const drink = {
+      id: idDrink,
+      name: strDrink,
+      type: 'drink',
+      nationality: '',
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic,
+      image: strDrinkThumb,
+    };
+    if (isFavorite) {
+      setFavorites(favorites.filter((recipe) => recipe.id !== idDrink));
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favorites
+        .filter((recipe) => recipe.id !== idDrink)));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([...favorites, drink]));
+      setFavorites([...favorites, drink]);
+    }
+  };
+
+  const saveMeals = () => {
+    const { idMeal, strMeal, strArea, strCategory, strMealThumb } = recipeFavorite;
+    const meal = {
+      id: idMeal,
+      name: strMeal,
+      type: 'meal',
+      nationality: strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      image: strMealThumb,
+    };
+    if (isFavorite) {
+      setFavorites(favorites.filter((recipe) => recipe.id !== idMeal));
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favorites
+        .filter((recipe) => recipe.id !== idMeal)));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([...favorites, meal]));
+      setFavorites([...favorites, meal]);
+    }
+  };
+
+  const saveFavorite = () => {
+    const drinksOrMeals = shareUrl.split('/')[3];
+    if (drinksOrMeals === 'drinks') {
+      saveDrinks();
+    } else {
+      saveMeals();
+    }
+    console.log(favorites);
+  };
+  return (
+    <div>
+      <button
+        data-testid="favorite-btn"
+        onClick={ saveFavorite }
+        src={ isFavorite ? heartBlack : heartWhite }
+      >
+        {isFavorite
+          ? <img src={ heartBlack } alt="heart-black" />
+          : <img src={ heartWhite } alt="heart-white" />}
+      </button>
+      <button data-testid="share-btn" onClick={ clickShare }>
+        <img src={ shareIcon } alt="share-icon" />
+      </button>
+      {
+        isCopy && (
+          <div>
+            <p>Link copied!</p>
+          </div>
+        )
+      }
+    </div>
+  );
+}
+
+ButtonCompFavor.propTypes = {
+  recipeFavorite: PropTypes.shape({
+    idDrink: PropTypes.string,
+    idMeal: PropTypes.string,
+    strAlcoholic: PropTypes.string,
+    strArea: PropTypes.string,
+    strCategory: PropTypes.string,
+    strDrink: PropTypes.string,
+    strDrinkThumb: PropTypes.string,
+    strMeal: PropTypes.string,
+    strMealThumb: PropTypes.string,
+  }).isRequired,
+  shareUrl: PropTypes.shape({
+    split: PropTypes.func,
+  }).isRequired,
+};
+
+export default ButtonCompFavor;
