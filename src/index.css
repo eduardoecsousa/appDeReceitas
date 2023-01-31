@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.carrosel {
+  padding: 0 15px;
+	display: grid;
+	grid-template-columns: repeat(10, 50vw);
+	grid-template-rows: 1fr;
+	grid-row-gap: 1rem;
+	overflow: scroll;
+	scroll-snap-type: both mandatory;
+	scroll-padding: 1rem;
+}
+
+.container-item-carrosel {
+  width: 170px;
+}

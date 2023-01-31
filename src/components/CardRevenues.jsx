@@ -7,8 +7,6 @@ function CardRevenues({ recipe, index, titlePage }) {
   const name = titlePage === 'Drinks' ? 'strDrink' : 'strMeal';
   const ROUT = titlePage === 'Drinks' ? '/drinks' : '/meals';
   const ID = titlePage === 'Drinks' ? 'idDrink' : 'idMeal';
-  console.log(recipe);
-  console.log(recipe[ID]);
   return (
     <Link
       to={ `${ROUT}/${recipe[ID]}` }
