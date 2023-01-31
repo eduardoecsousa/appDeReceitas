@@ -23,16 +23,9 @@ function ButtonCompFavor({ shareUrl, recipeFavorite }) {
       const keyObjId = shareUrl.split('/')[3] === 'drinks'
         ? 'idDrink'
         : 'idMeal';
-      const favVerify = favorites.some((recipe) => {
-        console.log(recipe);
-        console.log(recipe.id);
-        console.log(keyObjId);
-        console.log(recipeFavorite);
-        console.log(recipeFavorite[keyObjId]);
-        return recipe.id === recipeFavorite[keyObjId];
-      });
+      const favVerify = favorites
+        .some((recipe) => recipe.id === recipeFavorite[keyObjId]);
       setIsFavorite(favVerify);
-      console.log(favorites);
     }
   }, [favorites, recipeFavorite]);
 
@@ -99,7 +92,6 @@ function ButtonCompFavor({ shareUrl, recipeFavorite }) {
     } else {
       saveMeals();
     }
-    console.log(favorites);
   };
   return (
     <div>

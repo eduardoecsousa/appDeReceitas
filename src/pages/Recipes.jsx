@@ -11,7 +11,6 @@ import Filter from '../components/Filter';
 const NUMBER = 11;
 
 function Recipes({ dispatch, revenues, titlePage, history: { location: { pathname } } }) {
-  console.log(revenues);
   const { makeFetch, isLoading } = useFetch();
   const [clear, setClear] = useState();
 
