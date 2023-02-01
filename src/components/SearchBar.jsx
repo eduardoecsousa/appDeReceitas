@@ -57,6 +57,7 @@ function SearchBar({ titlePage, dispatch }) {
   const toRedirect = () => {
     const API = titlePage === 'Drinks' ? 'drinks' : 'meals';
     const ID = titlePage === 'Drinks' ? 'idDrink' : 'idMeal';
+    console.log(returnAPI[API][0][ID]);
     return (<Redirect to={ `/${API}/${returnAPI[API][0][ID]}` } />);
   };
 

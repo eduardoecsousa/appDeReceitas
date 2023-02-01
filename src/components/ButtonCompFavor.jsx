@@ -61,9 +61,11 @@ function ButtonCompFavor({ shareUrl, recipeFavorite, setUpdateStorage, buttonInd
       image: strDrinkThumb,
     };
     if (isFavorite) {
-      setFavorites(favorites.filter((recipe) => recipe.id !== idDrink));
-      localStorage.setItem('favoriteRecipes', JSON.stringify(favorites
-        .filter((recipe) => recipe.id !== idDrink)));
+      const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const storageFavorites = (storage
+        .filter((recipe) => recipe.id !== idDrink));
+      setFavorites(storageFavorites);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(storageFavorites));
     } else {
       localStorage.setItem('favoriteRecipes', JSON.stringify([...favorites, drink]));
       setFavorites([...favorites, drink]);
@@ -82,9 +84,11 @@ function ButtonCompFavor({ shareUrl, recipeFavorite, setUpdateStorage, buttonInd
       image: strMealThumb,
     };
     if (isFavorite) {
-      setFavorites(favorites.filter((recipe) => recipe.id !== idMeal));
-      localStorage.setItem('favoriteRecipes', JSON.stringify(favorites
-        .filter((recipe) => recipe.id !== idMeal)));
+      const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const storageFavorites = (storage
+        .filter((recipe) => recipe.id !== idMeal));
+      setFavorites(storageFavorites);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(storageFavorites));
     } else {
       localStorage.setItem('favoriteRecipes', JSON.stringify([...favorites, meal]));
       setFavorites([...favorites, meal]);
@@ -99,7 +103,7 @@ function ButtonCompFavor({ shareUrl, recipeFavorite, setUpdateStorage, buttonInd
     } else {
       saveMeals();
     }
-    setUpdateStorage((prevState) => !prevState);
+    if (setUpdateStorage) setUpdateStorage((prevState) => !prevState);
   };
   return (
     <div>
