@@ -37,6 +37,7 @@ function FavoriteRecipes({ dispatch }) {
     </div>
   );
 }
+// lint
 
 FavoriteRecipes.propTypes = {
   dispatch: PropTypes.func.isRequired,
