@@ -7,6 +7,7 @@ import { changeTile, getRevenues } from '../redux/actions';
 import Footer from '../components/Footer';
 import useFetch from '../hooks/useFetch';
 import Filter from '../components/Filter';
+import Header from '../components/Header';
 
 const NUMBER = 11;
 
@@ -38,6 +39,7 @@ function Recipes({ dispatch, revenues, titlePage, history: { location: { pathnam
   const id = titlePage === 'Drinks' ? 'idDrink' : 'idMeal';
   return (
     <div>
+      <Header />
       <Filter setClear={ setClear } />
       {isLoading && <p>Loading...</p>}
       {revenues.map((recipe, index) => index <= NUMBER && (

@@ -11,9 +11,9 @@ function CardDatailsDrinks({ details, history }) {
   const [continueRecipe, setContinueRecipe] = useState(false);
   const { makeFetch } = useFetch();
   useEffect(() => {
+    console.log('a');
     if (details && localStorage.inProgressRecipes) {
       const recipeProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      console.log(recipeProgress.drinks);
       if (recipeProgress.drinks) {
         const keysMeals = Object.keys(recipeProgress.drinks);
         setContinueRecipe(keysMeals.some((key) => key === details.idDrink));

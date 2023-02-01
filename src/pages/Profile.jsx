@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { changeTile } from '../redux/actions';
 import Footer from '../components/Footer';
 import ButtonGeneric from '../components/ButtonGeneric';
+import Header from '../components/Header';
 
 function Profile({ dispatch, history }) {
   const [email, setEmail] = useState('');
@@ -15,6 +16,7 @@ function Profile({ dispatch, history }) {
 
   return (
     <div>
+      <Header />
       {email && <p data-testid="profile-email">{email.email}</p>}
       <ButtonGeneric
         id="profile-done-btn"

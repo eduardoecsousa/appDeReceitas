@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { changeTile } from '../redux/actions';
 import FilterMealsOrDrinks from '../components/FilterMealsOrDrinks';
 import CardFavorite from '../components/CardFavorite';
+import Header from '../components/Header';
 
 function FavoriteRecipes({ dispatch }) {
   const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -19,6 +20,7 @@ function FavoriteRecipes({ dispatch }) {
   }, [updateStorage]);
   return (
     <div>
+      <Header />
       { !filters || filters.length < 1
         ? <h3>Você não tem receitas favoritas.</h3>
         : (

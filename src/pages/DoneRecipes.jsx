@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { changeTile } from '../redux/actions';
 import CardDoneRecipes from '../components/CardDoneRecipes';
 import FilterMealsOrDrinks from '../components/FilterMealsOrDrinks';
+import Header from '../components/Header';
 
 function DoneRecipes({ dispatch }) {
   useEffect(() => {
@@ -15,6 +16,7 @@ function DoneRecipes({ dispatch }) {
 
   return (
     <div>
+      <Header />
       { !getDoneRecipes
         ? <h3>Você não tem receitas feitas.</h3>
         : (
