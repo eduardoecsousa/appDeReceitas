@@ -7,6 +7,7 @@ import shareIcon from '../images/shareIcon.svg';
 // import useFetch from '../hooks/useFetch';
 
 const NUMBER = 2;
+
 // const getDoneRecipes = [
 //   {
 //     id: '52771',
