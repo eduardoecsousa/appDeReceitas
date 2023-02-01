@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import useFetch from '../hooks/useFetch';
 import ButtonCompFavor from './ButtonCompFavor';
+import CardDetails from './CardDetails';
 import CardRecomend from './CardRecomend';
 
 function CardDatailsDrinks({ details, history }) {
-  console.log(details);
   const [recipeIngredient, setRecipeIngredient] = useState([]);
   const [recommendations, setRecommendations] = useState(null);
   const [continueRecipe, setContinueRecipe] = useState(false);
@@ -13,8 +13,11 @@ function CardDatailsDrinks({ details, history }) {
   useEffect(() => {
     if (details && localStorage.inProgressRecipes) {
       const recipeProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      const keysMeals = Object.keys(recipeProgress.drinks);
-      setContinueRecipe(keysMeals.some((key) => key === details.idDrink));
+      console.log(recipeProgress.drinks);
+      if (recipeProgress.drinks) {
+        const keysMeals = Object.keys(recipeProgress.drinks);
+        setContinueRecipe(keysMeals.some((key) => key === details.idDrink));
+      }
     }
   }, [details]);
 
@@ -50,16 +53,7 @@ function CardDatailsDrinks({ details, history }) {
   return (
     <div>
       <ButtonCompFavor shareUrl={ shareUrl } recipeFavorite={ details } />
-      <img
-        data-testid="recipe-photo"
-        src={ details.strDrinkThumb }
-        alt="img-details"
-        style={ {
-          maxWidth: '360px',
-        } }
-      />
-      <h4 data-testid="recipe-title">{ details.strDrink }</h4>
-      <p data-testid="recipe-category">{ details.strAlcoholic}</p>
+      <CardDetails details={ details } />
       {recipeIngredient.map((component, index) => (
         component.ingredient !== null || component.ingredient !== '' ? (
           <div key={ index }>
@@ -67,16 +61,12 @@ function CardDatailsDrinks({ details, history }) {
               data-testid={ `${index}-ingredient-name-and-measure` }
             >
               {component.ingredient}
-            </p>
-            <p
-              data-testid={ `${index}-ingredient-name-and-measure` }
-            >
+
               {component.measure}
             </p>
           </div>
         ) : ''
       ))}
-      <p data-testid="instructions">{details.strInstructions}</p>
       <CardRecomend recomends={ recommendations } mealsOrDrinks="drinks" />
       <button
         data-testid="start-recipe-btn"

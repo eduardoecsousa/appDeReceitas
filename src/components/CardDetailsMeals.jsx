@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import useFetch from '../hooks/useFetch';
+import CardDetails from './CardDetails';
 import ButtonCompFavor from './ButtonCompFavor';
 import CardRecomend from './CardRecomend';
 
@@ -14,8 +15,10 @@ function CardDetailsMeals({ details, history }) {
   useEffect(() => {
     if (details && localStorage.inProgressRecipes) {
       const recipeProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      const keysMeals = Object.keys(recipeProgress.meals);
-      setContinueRecipe(keysMeals.some((key) => key === details.idMeal));
+      if (recipeProgress.meals) {
+        const keysMeals = Object.keys(recipeProgress.meals);
+        setContinueRecipe(keysMeals.some((key) => key === details.idMeal));
+      }
     }
   }, [details]);
 
@@ -63,16 +66,7 @@ function CardDetailsMeals({ details, history }) {
   return (
     <div>
       <ButtonCompFavor shareUrl={ shareUrl } recipeFavorite={ details } />
-      <img
-        data-testid="recipe-photo"
-        src={ details.strMealThumb }
-        alt="img-details"
-        style={ {
-          maxWidth: '360px',
-        } }
-      />
-      <h4 data-testid="recipe-title">{ details.strMeal }</h4>
-      <p data-testid="recipe-category">{ details.strCategory}</p>
+      <CardDetails details={ details } />
       {recipeIngredient.map((component, index) => (
         component.ingredient !== null || component.ingredient !== '' ? (
           <div key={ index }>
@@ -80,16 +74,11 @@ function CardDetailsMeals({ details, history }) {
               data-testid={ `${index}-ingredient-name-and-measure` }
             >
               {component.ingredient}
-            </p>
-            <p
-              data-testid={ `${index}-ingredient-name-and-measure` }
-            >
               {component.measure}
             </p>
           </div>
         ) : ''
       ))}
-      <p data-testid="instructions">{details.strInstructions}</p>
       <iframe
         width="360"
         height="200"

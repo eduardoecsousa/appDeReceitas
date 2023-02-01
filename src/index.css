@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.isMarked {
+  text-decoration: line-through solid rgb(0, 0, 0)
+}
+
 .carrosel {
   padding: 0 15px;
 	display: grid;
