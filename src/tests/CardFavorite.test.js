@@ -6,6 +6,13 @@ import App from '../App';
 import oneMeal from '../../cypress/mocks/oneMeal';
 import oneDrink from '../../cypress/mocks/oneDrink';
 
+const urlFavorites = '/favorite-recipes';
+const favoriteRecipe = {
+  meals: {
+    178319: [],
+  },
+};
+
 describe('Testa os favoritos', () => {
   afterEach(() => {
     localStorage.clear();
@@ -17,13 +24,8 @@ describe('Testa os favoritos', () => {
     });
     const { history } = renderWithRouterAndRedux(<App />);
     act(() => {
-      history.push('/favorite-recipes');
+      history.push(urlFavorites);
     });
-    const favoriteRecipe = {
-      meals: {
-        52771: [],
-      },
-    };
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipe));
     const firstImg = '0-horizontal-image';
     expect(firstImg).toBeInTheDocument();
@@ -38,13 +40,8 @@ describe('Testa os favoritos', () => {
     });
     const { history } = renderWithRouterAndRedux(<App />);
     act(() => {
-      history.push('/favorite-recipes');
+      history.push(urlFavorites);
     });
-    const favoriteRecipe = {
-      meals: {
-        178319: [],
-      },
-    };
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipe));
     const firstImg = '0-horizontal-image';
     expect(firstImg).toBeInTheDocument();
@@ -52,24 +49,19 @@ describe('Testa os favoritos', () => {
     await waitFor(() => {
       expect(history.location.pathname).toBe('/drinks/178319');
     });
-    test('Os botões de favoritar e compartilhar', () => {
-      global.fetch = jest.fn().mockResolvedValue({
-        status: 200, ok: true, json: jest.fn().mockResolvedValue(oneMeal),
-      });
-      const { history } = renderWithRouterAndRedux(<App />);
-      act(() => {
-        history.push('/favorite-recipes');
-      });
-      const favoriteRecipe = {
-        meals: {
-          52771: [],
-        },
-      };
-      localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipe));
-      const btnFavorite = screen.getByTestId('0-horizontal-favorite-btn');
-      expect(btnFavorite).toBeInTheDocument();
-      userEvent.click(btnFavorite);
-      expect(btnFavorite).not.toBeInTheDocument();
+  });
+  test('Os botões de favoritar e compartilhar', () => {
+    global.fetch = jest.fn().mockResolvedValue({
+      status: 200, ok: true, json: jest.fn().mockResolvedValue(oneMeal),
     });
+    const { history } = renderWithRouterAndRedux(<App />);
+    act(() => {
+      history.push(urlFavorites);
+    });
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipe));
+    const btnFavorite = screen.getByTestId('0-horizontal-favorite-btn');
+    expect(btnFavorite).toBeInTheDocument();
+    userEvent.click(btnFavorite);
+    expect(btnFavorite).not.toBeInTheDocument();
   });
 });
