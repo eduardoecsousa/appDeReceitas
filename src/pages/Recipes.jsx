@@ -41,7 +41,7 @@ function Recipes({ dispatch, revenues, titlePage, history: { location: { pathnam
     <div>
       <Header />
       <Filter setClear={ setClear } />
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <p data-testid="loading">Loading...</p>}
       {revenues.map((recipe, index) => index <= NUMBER && (
         <CardRevenues
           recipe={ recipe }
