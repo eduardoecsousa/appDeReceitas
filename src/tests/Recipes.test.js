@@ -82,4 +82,15 @@ describe('Testa as paginas de receitas', () => {
     const buttonFilterAll = screen.getByTestId('All-category-filter');
     userEvent.click(buttonFilterAll);
   });
+  it('Se o objeto vier vazio', async () => {
+    global.fetch = jest.fn().mockResolvedValue({
+      status: 200, ok: true, json: jest.fn().mockResolvedValue({}),
+    });
+    const { history } = renderWithRouterAndRedux(<App />);
+    act(() => {
+      history.push('/drinks');
+    });
+    const load = screen.getByTestId('loading');
+    await waitForElementToBeRemoved(load);
+  });
 });

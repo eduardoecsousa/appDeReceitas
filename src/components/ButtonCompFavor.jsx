@@ -11,7 +11,6 @@ function ButtonCompFavor({ shareUrl, recipeFavorite, setUpdateStorage, buttonInd
   const [favorites, setFavorites] = useState([]);
   const [isCopy, setIsCopy] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  let isClicked = false;
 
   const favoriteId = typeof buttonIndex === 'number'
     ? `${buttonIndex}-horizontal-favorite-btn` : 'favorite-btn';
@@ -22,7 +21,7 @@ function ButtonCompFavor({ shareUrl, recipeFavorite, setUpdateStorage, buttonInd
     if (localStorage.favoriteRecipes) {
       setFavorites(JSON.parse(localStorage.getItem('favoriteRecipes')));
     }
-  }, [isClicked]);
+  }, []);
 
   useEffect(() => {
     if (recipeFavorite) {
@@ -97,7 +96,6 @@ function ButtonCompFavor({ shareUrl, recipeFavorite, setUpdateStorage, buttonInd
 
   const saveFavorite = () => {
     const drinksOrMeals = shareUrl.split('/')[3];
-    isClicked = !isClicked;
     if (drinksOrMeals === 'drinks') {
       saveDrinks();
     } else {

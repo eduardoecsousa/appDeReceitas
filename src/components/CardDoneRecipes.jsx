@@ -80,7 +80,7 @@ function CardDoneRecipes({ getDoneRecipes }) {
           {
             isCopy.id === item.id && (
               <div>
-                <p>Link copied!</p>
+                <p data-testid="link-copied">Link copied!</p>
               </div>
             )
           }
