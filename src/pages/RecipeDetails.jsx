@@ -6,6 +6,7 @@ import useFetch from '../hooks/useFetch';
 import CardDetailsMeals from '../components/CardDetailsMeals';
 import CardDatailsDrinks from '../components/CardDatailsDrinks';
 import { changeTile } from '../redux/actions';
+import '../css/RecipesDetails.css';
 
 function RecipeDetails({
   match: { params: { id } }, location: { pathname }, history, dispatch }) {

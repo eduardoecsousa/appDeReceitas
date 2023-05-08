@@ -1,0 +1,87 @@
+h3 {
+  color:#41197F;
+  font-family: 'Epilogue';
+  font-style: italic;
+  height: 21px;
+  letter-spacing: 0.165em;
+}
+
+.form-control {
+  border: 1px solid #41197F !important;
+}
+
+.form-control::placeholder {
+  color:#41197F !important;
+}
+
+.btn {
+  font-family: 'Epilogue' !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  height: 40px !important;
+  letter-spacing: 0.03em !important;
+  line-height: 14px !important;
+}
+
+#purple-backgound {
+  background-color: #41197F;
+  height: 55vh;
+  margin-bottom: 70px;
+  padding-top: 54px;
+  width: 100vw;
+}
+
+#purple-backgound img {
+  width: 170px;
+}
+
+#img-tomato {
+  position: absolute;
+  right: -18px;
+  top: 211px;
+}
+
+#img-tomato img {
+  transform: scaleX(-1);
+  width: 402px;
+}
+
+.image-tomato {
+  background-image: url('../images/imagens/tomato.png');
+  background-position: -17px 2px;
+  background-size: 425px 215px;
+  display: block;
+  filter: drop-shadow(0 7px 15px rgba(68, 73, 85, 0.25));
+  height: 216px;
+  position: absolute;
+  top: 219px;
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+  width: 358px;
+  z-index: 1;
+}
+
+.purple-login {
+  background: #41197f;
+  height: 360px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 360px;
+}
+
+.title-login {
+  color: #41197f;
+  font-family: Arial , Helvetica , sans-serif;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 500;
+  height: 21px;
+  left: 89px;
+  letter-spacing: 0.165em;
+  line-height: 20px;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  top: 427px;
+  width: 182px;
+}

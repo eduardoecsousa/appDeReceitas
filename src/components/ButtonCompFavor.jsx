@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import copy from 'clipboard-copy';
 import heartWhite from '../images/whiteHeartIcon.svg';
-import shareIcon from '../images/shareIcon.svg';
-import heartBlack from '../images/blackHeartIcon.svg';
+import shareIcon from '../images/imagens/ShareYellow.svg';
+import yellowBlack from '../images/imagens/HeartYellow.svg';
+import ModalLinkCopied from './ModalLinkCopied';
 
 const TIME = 3000;
 
@@ -11,6 +12,7 @@ function ButtonCompFavor({ shareUrl, recipeFavorite, setUpdateStorage, buttonInd
   const [favorites, setFavorites] = useState([]);
   const [isCopy, setIsCopy] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  let isClicked = false;
 
   const favoriteId = typeof buttonIndex === 'number'
     ? `${buttonIndex}-horizontal-favorite-btn` : 'favorite-btn';
@@ -21,7 +23,7 @@ function ButtonCompFavor({ shareUrl, recipeFavorite, setUpdateStorage, buttonInd
     if (localStorage.favoriteRecipes) {
       setFavorites(JSON.parse(localStorage.getItem('favoriteRecipes')));
     }
-  }, []);
+  }, [isClicked]);
 
   useEffect(() => {
     if (recipeFavorite) {
@@ -96,6 +98,7 @@ function ButtonCompFavor({ shareUrl, recipeFavorite, setUpdateStorage, buttonInd
 
   const saveFavorite = () => {
     const drinksOrMeals = shareUrl.split('/')[3];
+    isClicked = !isClicked;
     if (drinksOrMeals === 'drinks') {
       saveDrinks();
     } else {
@@ -107,20 +110,26 @@ function ButtonCompFavor({ shareUrl, recipeFavorite, setUpdateStorage, buttonInd
     <div>
       <button
         data-testid={ favoriteId }
+        className={ favoriteId }
         onClick={ saveFavorite }
-        src={ isFavorite ? heartBlack : heartWhite }
+        src={ isFavorite ? yellowBlack : heartWhite }
       >
         {isFavorite
-          ? <img src={ heartBlack } alt="heart-black" />
+          ? <img src={ yellowBlack } alt="heart-black" />
           : <img src={ heartWhite } alt="heart-white" />}
       </button>
-      <button data-testid={ shareId } onClick={ clickShare } src={ shareIcon }>
+      <button
+        data-testid={ shareId }
+        className={ shareId }
+        onClick={ clickShare }
+        src={ shareIcon }
+      >
         <img src={ shareIcon } alt="share-icon" />
       </button>
       {
         isCopy && (
           <div>
-            <p>Link copied!</p>
+            <ModalLinkCopied />
           </div>
         )
       }

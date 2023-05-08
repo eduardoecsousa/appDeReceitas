@@ -67,35 +67,44 @@ function CardDetailsMeals({ details, history }) {
     <div>
       <ButtonCompFavor shareUrl={ shareUrl } recipeFavorite={ details } />
       <CardDetails details={ details } />
-      {recipeIngredient.map((component, index) => (
-        component.ingredient !== null || component.ingredient !== '' ? (
-          <div key={ index }>
-            <p
-              data-testid={ `${index}-ingredient-name-and-measure` }
-            >
-              {component.ingredient}
-              {component.measure}
-            </p>
-          </div>
-        ) : ''
-      ))}
-      <iframe
-        width="360"
-        height="200"
-        src={ urlYoutube }
-        allow={ allow }
-        allowFullScreen
-        title="Embedded youtube"
-        data-testid="video"
-      />
+      <div>
+        <h3 className="title-secondary">Ingredients</h3>
+        <div className="constainer-border">
+          {recipeIngredient.map((component, index) => (
+            component.ingredient ? (
+              <ul key={ index }>
+                <li
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                >
+                  {`${component.ingredient} ${component.measure}`}
+                </li>
+              </ul>
+            ) : ''
+          ))}
+        </div>
+      </div>
+      <div>
+        <h3 className="title-secondary">Video</h3>
+        <iframe
+          width="360"
+          height="200"
+          src={ urlYoutube }
+          allow={ allow }
+          allowFullScreen
+          title="Embedded youtube"
+          data-testid="video"
+        />
+      </div>
       <CardRecomend recomends={ recommendations } mealsOrDrinks="meals" />
-      <button
-        data-testid="start-recipe-btn"
-        className="start-recipe"
-        onClick={ redirectInProgress }
-      >
-        {continueRecipe ? 'Continue Recipe' : 'Start Recipe'}
-      </button>
+      <div className="container-button">
+        <button
+          data-testid="start-recipe-btn"
+          className="start-recipe btn btn-warning"
+          onClick={ redirectInProgress }
+        >
+          {continueRecipe ? 'Continue Recipe' : 'Start Recipe'}
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,66 @@
+#recipesApp {
+  height: 20px;
+}
+
+.header-title {
+  margin: 20px 0 20px 0;
+  text-align: center;
+}
+
+.header-title h1 {
+  padding-top: 15px;
+  letter-spacing: 0.105em;
+  text-transform: uppercase;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 1000;
+  font-size: 20px;
+  line-height: 20px;
+  color: #41197F;
+}
+
+#search {
+  width: 100%;
+}
+
+#search-color {
+  background-color: #41197F;
+  position: absolute;
+  left: 45px;
+  top: 16px;
+  width: 268px;
+  height: 112px;
+  z-index: -1;
+  border-radius: 0px 0px 20px 20px;
+}
+
+.card-group {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+#search-content {
+  position: relative;
+  background-size: 50%;
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+}
+
+
+#search-content button {
+  color: white;
+  font-weight: 800;
+  /* height: 35px; */
+  width: 235px;
+}
+
+.radios {
+  margin-right: 2px;
+}
+
+.radio-label, .radio-label input {
+  margin-left: 3px;
+}

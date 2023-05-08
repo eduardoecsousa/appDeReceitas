@@ -11,7 +11,6 @@ function CardDatailsDrinks({ details, history }) {
   const [continueRecipe, setContinueRecipe] = useState(false);
   const { makeFetch } = useFetch();
   useEffect(() => {
-    console.log('a');
     if (details && localStorage.inProgressRecipes) {
       const recipeProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
       if (recipeProgress.drinks) {
@@ -54,27 +53,32 @@ function CardDatailsDrinks({ details, history }) {
     <div>
       <ButtonCompFavor shareUrl={ shareUrl } recipeFavorite={ details } />
       <CardDetails details={ details } />
-      {recipeIngredient.map((component, index) => (
-        component.ingredient !== null || component.ingredient !== '' ? (
-          <div key={ index }>
-            <p
-              data-testid={ `${index}-ingredient-name-and-measure` }
-            >
-              {component.ingredient}
-
-              {component.measure}
-            </p>
-          </div>
-        ) : ''
-      ))}
+      <div>
+        <h3 className="title-secondary">Ingredients</h3>
+        <div className="constainer-border">
+          {recipeIngredient.map((component, index) => (
+            component.ingredient ? (
+              <ul key={ index }>
+                <li
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                >
+                  {`${component.ingredient} ${component.measure}`}
+                </li>
+              </ul>
+            ) : ''
+          ))}
+        </div>
+      </div>
       <CardRecomend recomends={ recommendations } mealsOrDrinks="drinks" />
-      <button
-        data-testid="start-recipe-btn"
-        className="start-recipe"
-        onClick={ redirectInProgress }
-      >
-        {continueRecipe ? 'Continue Recipe' : 'Start Recipe'}
-      </button>
+      <div className="container-button">
+        <button
+          data-testid="start-recipe-btn"
+          className="start-recipe btn btn-warning"
+          onClick={ redirectInProgress }
+        >
+          {continueRecipe ? 'Continue Recipe' : 'Start Recipe'}
+        </button>
+      </div>
     </div>
   );
 }

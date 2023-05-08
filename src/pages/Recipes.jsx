@@ -2,6 +2,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { CardGroup } from 'react-bootstrap';
 import CardRevenues from '../components/CardRevenues';
 import { changeTile, getRevenues } from '../redux/actions';
 import Footer from '../components/Footer';
@@ -41,15 +42,17 @@ function Recipes({ dispatch, revenues, titlePage, history: { location: { pathnam
     <div>
       <Header />
       <Filter setClear={ setClear } />
-      {isLoading && <p data-testid="loading">Loading...</p>}
-      {revenues.map((recipe, index) => index <= NUMBER && (
-        <CardRevenues
-          recipe={ recipe }
-          index={ index }
-          titlePage={ titlePage }
-          key={ recipe[id] }
-        />
-      ))}
+      {isLoading && <p>Loading...</p>}
+      <CardGroup>
+        {revenues.map((recipe, index) => index <= NUMBER && (
+          <CardRevenues
+            recipe={ recipe }
+            index={ index }
+            titlePage={ titlePage }
+            key={ recipe[id] }
+          />
+        ))}
+      </CardGroup>
       <Footer />
     </div>
   );

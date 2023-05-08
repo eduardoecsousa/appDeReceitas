@@ -92,28 +92,31 @@ export default function RadioIngredients({ details, setAllDone }) {
 
   return (
     <div>
-      {recipeIngredient.map((component, index) => (
-        component.ingredient ? (
-          <label
-            data-testid={ `${index}-ingredient-step` }
-            htmlFor={ `${index}-ingredient-step` }
-            key={ index }
-            className={ component.marked && 'isMarked' }
-          >
-            <input
-              type="checkbox"
-              value={ component.marked }
-              checked={ component.marked }
-              onChange={ handleChange }
-              name={ component.ingredient }
-              id={ `${index}-ingredient-step` }
-            />
-            {component.ingredient}
-            {component.measure}
+      <h3 className="title-secondary">Ingredients</h3>
+      <div className="container-checkbox constainer-border radio">
+        {recipeIngredient.map((component, index) => (
+          component.ingredient ? (
+            <label
+              data-testid={ `${index}-ingredient-step` }
+              htmlFor={ `${index}-ingredient-step` }
+              key={ index }
+              className={ component.marked && 'isMarked' }
+            >
+              <input
+                type="checkbox"
+                value={ component.marked }
+                checked={ component.marked }
+                onChange={ handleChange }
+                name={ component.ingredient }
+                id={ `${index}-ingredient-step` }
+              />
+              {component.ingredient}
+              {component.measure}
 
-          </label>
-        ) : ''
-      ))}
+            </label>
+          ) : ''
+        ))}
+      </div>
     </div>
   );
 }

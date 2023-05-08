@@ -3,12 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import SearchIcon from '../images/searchIcon.svg';
 import useFetch from '../hooks/useFetch';
 import { getRevenues } from '../redux/actions';
 
-function SearchBar({ titlePage, dispatch }) {
-  const [search, setSearch] = useState(false);
+function SearchBar({ titlePage, dispatch, search }) {
   const [valueInput, setValueInput] = useState('');
   const [option, setOption] = useState('');
   const [returnAPI, setReturnAPI] = useState();
@@ -57,66 +55,79 @@ function SearchBar({ titlePage, dispatch }) {
   const toRedirect = () => {
     const API = titlePage === 'Drinks' ? 'drinks' : 'meals';
     const ID = titlePage === 'Drinks' ? 'idDrink' : 'idMeal';
+    console.log(returnAPI[API][0][ID]);
     return (<Redirect to={ `/${API}/${returnAPI[API][0][ID]}` } />);
   };
 
   return (
     <div>
       {redirect && toRedirect()}
-      <button
-        type="button"
-        onClick={ () => { setSearch(!search); } }
-      >
-        <img
-          src={ SearchIcon }
-          alt="icon-search"
-          data-testid="search-top-btn"
-        />
-      </button>
       {
         search && (
-          <div>
-            <input
-              data-testid="search-input"
-              type="text"
-              value={ valueInput }
-              onChange={ ({ target }) => setValueInput(target.value) }
-            />
-            <label htmlFor="ingredient-search-radio">
-              <input
-                type="radio"
-                data-testid="ingredient-search-radio"
-                name="radio-button"
-                id="ingredient-search-radio"
-                onChange={ () => setOption('ingredient') }
-              />
-              Ingredient
-            </label>
-            <label htmlFor="name-search-radio">
-              <input
-                type="radio"
-                data-testid="name-search-radio"
-                name="radio-button"
-                id="name-search-radio"
-                onChange={ () => setOption('name') }
-              />
-              Name
-            </label>
-            <label htmlFor="first-letter-search-radio">
-              <input
-                type="radio"
-                data-testid="first-letter-search-radio"
-                name="radio-button"
-                id="first-letter-search-radio"
-                onChange={ () => setOption('firstLetter') }
-              />
-              First letter
-            </label>
+          <div id="search-content">
+            <div id="search-color" />
+            <div id="search-bar">
+              <label htmlFor="search" className="form-label">
+                <input
+                  id="search"
+                  className="form-control"
+                  data-testid="search-input"
+                  placeholder="Search"
+                  type="text"
+                  value={ valueInput }
+                  onChange={ ({ target }) => setValueInput(target.value) }
+                />
+              </label>
+            </div>
+            <div id="search-radio">
+              <label
+                className="radio-label"
+                htmlFor="ingredient-search-radio"
+              >
+                <input
+                  className="radios"
+                  type="radio"
+                  data-testid="ingredient-search-radio"
+                  name="radio-button"
+                  id="ingredient-search-radio"
+                  onChange={ () => setOption('ingredient') }
+                />
+                Ingredient
+              </label>
+              <label
+                className="radio-label"
+                htmlFor="name-search-radio"
+              >
+                <input
+                  className="radios"
+                  type="radio"
+                  data-testid="name-search-radio"
+                  name="radio-button"
+                  id="name-search-radio"
+                  onChange={ () => setOption('name') }
+                />
+                Name
+              </label>
+              <label
+                className="radio-label"
+                htmlFor="first-letter-search-radio"
+              >
+                <input
+                  type="radio"
+                  className="radios"
+                  data-testid="first-letter-search-radio"
+                  name="radio-button"
+                  id="first-letter-search-radio"
+                  onChange={ () => setOption('firstLetter') }
+                />
+                First letter
+              </label>
+            </div>
             <button
-              data-testid="exec-search-btn"
+              className="btn btn-warning"
               onClick={ handleSearch }
             >
-              BUSCAR
+              Search
             </button>
           </div>
         )
@@ -127,8 +138,9 @@ function SearchBar({ titlePage, dispatch }) {
 }
 
 SearchBar.propTypes = {
-  titlePage: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
+  search: PropTypes.bool.isRequired,
+  titlePage: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

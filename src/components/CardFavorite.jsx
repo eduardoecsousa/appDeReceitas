@@ -37,7 +37,7 @@ function CardFavorite({ favorites, setUpdateStorage }) {
             <p data-testid={ `${index}-horizontal-top-text` }>
               {(`${item.nationality} - ${item.category}`)}
             </p>
-            {item.alcoholicOrNot.length > 0
+            {item.alcoholicOrNot
               ? (
                 <p data-testid={ `${index}-horizontal-top-text` }>
                   {item.alcoholicOrNot}

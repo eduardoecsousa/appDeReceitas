@@ -1,0 +1,92 @@
+.title {
+  position: relative;
+  font-style: normal;
+  text-align: center;
+  line-height: 20px;
+  font-size: 20px;
+  font-family: 'Epilogue';
+  letter-spacing: 0.105em;
+  font-weight: 900;
+  top: 10px;
+  margin: 10px 0px; 
+  color: #FCC436;
+}
+
+.container-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.container-category {
+  display: flex;
+  align-items: center;
+}
+
+.title-secondary {
+  margin-left: 10px;
+  margin-top: 17px;
+  font-family: 'Epilogue';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+}
+
+.instructions {
+  font-family: 'Epilogue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.constainer-border {
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border: 0.554397px solid #B1B1B1;
+  border-radius: 5.35144px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.category {
+  margin: 0 10px;
+  font-size: 18px;
+  margin-top: 9px;
+}
+
+.img-card-details {
+  width: 362.01px;
+  height: 190.85px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35));
+  border-radius: 0px;
+}
+
+.favorite-btn {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  position: absolute;
+  left: 141px;
+}
+
+.share-btn {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  position: absolute;
+  left: 183px;
+}
+
+iframe {
+  margin: 10px;
+}
+
+.radio {
+  margin-bottom: 47px;
+}

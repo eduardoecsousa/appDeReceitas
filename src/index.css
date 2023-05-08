@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.link * {
+  text-decoration: none;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -25,8 +29,34 @@ code {
 	overflow: scroll;
 	scroll-snap-type: both mandatory;
 	scroll-padding: 1rem;
+  position: relative;
+  margin-bottom: 47px;
 }
 
 .container-item-carrosel {
   width: 170px;
+}
+
+.Mymodal {
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  top: 30px;
+  left: 128px;
+  z-index: 10;
+  background-color: rgb(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+.Mymodal p { 
+  color: white;
+  margin: 2px;
+}
+
+.container-checkbox {
+  display: flex;
+  flex-direction: column;
 }

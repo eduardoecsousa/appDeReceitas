@@ -65,18 +65,20 @@ function RecipeInProgress({
   const shareUrl = `http://localhost:3000${pathname}`.split('/in-progress')[0];
   return (
     <div>
-      RecipeInProgress
-      <CardDetails details={ details } />
       <ButtonCompFavor recipeFavorite={ details } shareUrl={ shareUrl } />
+      <CardDetails details={ details } />
       <RadioIngredients details={ details } setAllDone={ setAllDone } />
-      <button
-        type="button"
-        onClick={ saveDoned }
-        data-testid="finish-recipe-btn"
-        disabled={ !allDone }
-      >
-        Finish Recipe
-      </button>
+      <div className="container-button">
+        <button
+          type="button"
+          onClick={ saveDoned }
+          data-testid="finish-recipe-btn"
+          disabled={ !allDone }
+          className="start-recipe btn btn-warning"
+        >
+          Finish Recipe
+        </button>
+      </div>
     </div>
   );
 }

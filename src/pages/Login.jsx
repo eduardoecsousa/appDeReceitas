@@ -1,7 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import { changeTile } from '../redux/actions';
+import '../css/Login.css';
+import logo from '../images/imagens/logo-recipes.png';
+import tomato from '../images/imagens/tomato.png';
 
 class Login extends React.Component {
   state = {
@@ -38,7 +43,6 @@ class Login extends React.Component {
     const { history } = this.props;
     const { email } = this.state;
     const user = { email };
-    // localStorage.setItem('user', JSON.stringify(user));
     localStorage.user = JSON.stringify(user);
     history.push('/meals');
   };
@@ -47,33 +51,51 @@ class Login extends React.Component {
     const { email, password, isButtonDisabled } = this.state;
     return (
       <section>
-        <div>
-          <input
-            data-testid="email-input"
-            type="email"
-            value={ email }
-            name="email"
-            onChange={ this.handleChange }
-          />
-
-          <input
-            data-testid="password-input"
-            type="password"
-            value={ password }
-            name="password"
-            onChange={ this.handleChange }
-          />
+        <div id="purple-backgound" className="text-center">
+          <img src={ logo } alt="logo" />
         </div>
+        <div id="img-tomato">
+          <img src={ tomato } alt="tomate" />
+        </div>
+        <div className="container">
+          <div className="text-center text-uppercase mb-4">
+            <h3>Login</h3>
+          </div>
 
-        <button
-          type="button"
-          data-testid="login-submit-btn"
-          disabled={ isButtonDisabled }
-          onClick={ this.handleClick }
-        >
-          Enter
-        </button>
+          <Form.Group className="mb-3">
+            <Form.Control
+              type="email"
+              name="email"
+              placeholder="Email"
+              data-testid="email-input"
+              value={ email }
+              onChange={ this.handleChange }
+            />
+          </Form.Group>
 
+          <Form.Group className="mb-3" controlId="password">
+            <Form.Control
+              type="password"
+              name="password"
+              placeholder="Password"
+              data-testid="password-input"
+              value={ password }
+              onChange={ this.handleChange }
+            />
+          </Form.Group>
+
+          <div className="d-grid gap-2">
+            <Button
+              variant="warning"
+              className="text-white"
+              data-testid="login-submit-btn"
+              disabled={ isButtonDisabled }
+              onClick={ this.handleClick }
+            >
+              ENTER
+            </Button>
+          </div>
+        </div>
       </section>
     );
   }

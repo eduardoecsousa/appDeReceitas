@@ -7,8 +7,8 @@ describe('Header', () => {
   test('Testa o titulo da pagina em todas as rotas', () => {
     const { history } = renderWithRouterAndRedux(<App />);
 
-    const routs = ['/profile', '/meals', '/drinks', '/done-recipes'];
-    const titles = ['Profile', 'Meals', 'Drinks', 'Done Recipes', 'Favorite Recipes'];
+    const routs = ['/', '/profile', '/meals', '/drinks', '/done-recipes'];
+    const titles = ['Login', 'Profile', 'Meals', 'Drinks', 'Done Recipes', 'Favorite Recipes'];
 
     routs.forEach((rout, index) => {
       act(() => {

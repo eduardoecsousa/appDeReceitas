@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function CardRevenues({ recipe, index, titlePage }) {
@@ -8,20 +9,28 @@ function CardRevenues({ recipe, index, titlePage }) {
   const ROUT = titlePage === 'Drinks' ? '/drinks' : '/meals';
   const ID = titlePage === 'Drinks' ? 'idDrink' : 'idMeal';
   return (
-    <Link
-      to={ `${ROUT}/${recipe[ID]}` }
-      data-testid={ `${index}-recipe-card` }
+    <Card
+      style={ {
+        maxWidth: '160px',
+        display: 'flex',
+      } }
     >
-      <img
-        src={ recipe[image] }
-        alt="img-recipe"
-        data-testid={ `${index}-card-img` }
-        style={ {
-          maxWidth: '360px',
-        } }
-      />
-      <p data-testid={ `${index}-card-name` }>{recipe[name]}</p>
-    </Link>
+
+      <Link
+        to={ `${ROUT}/${recipe[ID]}` }
+        data-testid={ `${index}-recipe-card` }
+      >
+        <Card.Img
+          src={ recipe[image] }
+          alt="img-recipe"
+          data-testid={ `${index}-card-img` }
+
+        />
+        <Card.Body>
+          <Card.Title data-testid={ `${index}-card-name` }>{recipe[name]}</Card.Title>
+        </Card.Body>
+      </Link>
+    </Card>
   );
 }
 

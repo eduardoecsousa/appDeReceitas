@@ -14,13 +14,14 @@ function Filter({ titlePage, dispatch, setClear }) {
     const API_NAME = titlePage === 'Drinks' ? 'thecocktaildb' : 'themealdb';
     const KEY = titlePage === 'Drinks' ? 'drinks' : 'meals';
     const url = `https://www.${API_NAME}.com/api/json/v1/1/list.php?c=list`;
-    if (titlePage.length > 1) {
-      const fetchData = async () => {
-        const response = await makeFetch(url);
-        setCategories(response[KEY]);
-      };
-      fetchData();
+    if (titlePage.length < 1) {
+      return;
     }
+    const fetchData = async () => {
+      const response = await makeFetch(url);
+      setCategories(response[KEY]);
+    };
+    fetchData();
   }, [titlePage]);
 
   const onClickFilter = async ({ target: { name } }) => {
